@@ -1,0 +1,49 @@
+{
+    "Stacks": [
+        {
+            "StackId": "arn:aws:cloudformation:ap-northeast-1:178625946981:stack/Dev-BLEAFsxnDataAnalytics/7cd9ba00-5f42-11f1-a545-0626e09db33f",
+            "StackName": "Dev-BLEAFsxnDataAnalytics",
+            "ChangeSetId": "arn:aws:cloudformation:ap-northeast-1:178625946981:changeSet/cdk-deploy-change-set/43b402cd-9977-4ed3-aca5-3fd8c0c3f0a6",
+            "Description": "BLEA FSxN Data Analytics sample for guest accounts (tag:blea-guest-fsxn-data-analytics-sample)",
+            "Parameters": [
+                {
+                    "ParameterKey": "BootstrapVersion",
+                    "ParameterValue": "/cdk-bootstrap/hnb659fds/version",
+                    "ResolvedValue": "31"
+                }
+            ],
+            "CreationTime": "2026-06-03T11:50:59.685000+00:00",
+            "LastUpdatedTime": "2026-06-03T11:51:10.807000+00:00",
+            "RollbackConfiguration": {},
+            "StackStatus": "CREATE_COMPLETE",
+            "DisableRollback": false,
+            "NotificationARNs": [],
+            "Capabilities": [
+                "CAPABILITY_IAM",
+                "CAPABILITY_NAMED_IAM",
+                "CAPABILITY_AUTO_EXPAND"
+            ],
+            "RoleARN": "arn:aws:iam::178625946981:role/cdk-hnb659fds-cfn-exec-role-178625946981-ap-northeast-1",
+            "Tags": [
+                {
+                    "Key": "Repository",
+                    "Value": "aws-samples/baseline-environment-on-aws"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "Development"
+                }
+            ],
+            "EnableTerminationProtection": false,
+            "DriftInformation": {
+                "StackDriftStatus": "NOT_CHECKED"
+            },
+            "LastOperations": [
+                {
+                    "OperationType": "CREATE_STACK",
+                    "OperationId": "2cf2849f-39a1-411d-9dfb-3b29ccc64ba3"
+                }
+            ]
+        }
+    ]
+}

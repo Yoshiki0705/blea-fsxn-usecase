@@ -1,0 +1,27 @@
+{
+    "Contents": [
+        {
+            "Key": "sample/data_001.csv",
+            "LastModified": "2026-06-03T12:27:58+00:00",
+            "ETag": "\"c0e78b2c359fcbc9fdedd3bc793fce8c-1\"",
+            "Size": 4768387,
+            "StorageClass": "FSX_ONTAP"
+        },
+        {
+            "Key": "sample/data_002.csv",
+            "LastModified": "2026-06-03T12:27:59+00:00",
+            "ETag": "\"0b2b3052564d29e471df8886f60dfa8a-1\"",
+            "Size": 4879248,
+            "StorageClass": "FSX_ONTAP"
+        },
+        {
+            "Key": "sample/data_003.csv",
+            "LastModified": "2026-06-03T12:27:59+00:00",
+            "ETag": "\"ff19476fbf0b482fe013b0ee513aca03-1\"",
+            "Size": 4879055,
+            "StorageClass": "FSX_ONTAP"
+        }
+    ],
+    "RequestCharged": null,
+    "Prefix": "sample/"
+}

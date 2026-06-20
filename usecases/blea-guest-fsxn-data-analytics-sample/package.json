@@ -1,0 +1,32 @@
+{
+  "private": true,
+  "name": "blea-guest-fsxn-data-analytics-sample",
+  "version": "1.0.0",
+  "description": "BLEA guest system use case: FSx for NetApp ONTAP data analytics with S3 Access Points",
+  "license": "MIT-0",
+  "bin": {
+    "blea-guest-fsxn-data-analytics-sample": "bin/blea-guest-fsxn-data-analytics-sample.js"
+  },
+  "scripts": {
+    "synth": "cdk synth -q",
+    "build": "tsc --build",
+    "clean": "tsc --build --clean && rm -rf cdk.out",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0",
+    "aws-cdk": "^2.219.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.4.0"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.219.0",
+    "constructs": "^10.3.0",
+    "source-map-support": "^0.5.21"
+  }
+}

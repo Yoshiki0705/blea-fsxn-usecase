@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "name": "blea-fsxn-shared",
+  "version": "1.0.0",
+  "description": "Shared modules for BLEA FSxN use cases (constructs, lambda, templates, docs)",
+  "license": "MIT-0",
+  "scripts": {
+    "build": "tsc --build",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.600.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "~5.4.0"
+  }
+}

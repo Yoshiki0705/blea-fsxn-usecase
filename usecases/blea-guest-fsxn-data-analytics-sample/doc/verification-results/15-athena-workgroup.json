@@ -1,0 +1,24 @@
+{
+    "WorkGroup": {
+        "Name": "fsxn-analytics",
+        "State": "ENABLED",
+        "Configuration": {
+            "ResultConfiguration": {
+                "OutputLocation": "s3://dev-bleafsxndataanalytics-dataanalyticsathenaquery-ffuksn0yykj8/results/",
+                "EncryptionConfiguration": {
+                    "EncryptionOption": "SSE_KMS",
+                    "KmsKey": "arn:aws:kms:ap-northeast-1:178625946981:key/70d1f992-66cb-4116-863c-930fa17c62d1"
+                }
+            },
+            "EnforceWorkGroupConfiguration": true,
+            "PublishCloudWatchMetricsEnabled": false,
+            "RequesterPaysEnabled": false,
+            "EngineVersion": {
+                "SelectedEngineVersion": "Athena engine version 3",
+                "EffectiveEngineVersion": "Athena engine version 3"
+            },
+            "EnableMinimumEncryptionConfiguration": false
+        },
+        "CreationTime": "2026-06-03T20:51:49.826000+09:00"
+    }
+}

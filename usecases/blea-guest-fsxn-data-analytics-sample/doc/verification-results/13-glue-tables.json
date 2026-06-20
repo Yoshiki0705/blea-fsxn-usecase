@@ -1,0 +1,100 @@
+{
+    "TableList": [
+        {
+            "Name": "fsxn_analytics_d_emase9hih8u3yemmaic6inea47x7rapn1b_ext_s3alias",
+            "DatabaseName": "fsxn_analytics_db",
+            "Owner": "owner",
+            "CreateTime": "2026-06-03T21:42:24+09:00",
+            "UpdateTime": "2026-06-03T21:42:24+09:00",
+            "LastAccessTime": "2026-06-03T21:42:24+09:00",
+            "Retention": 0,
+            "StorageDescriptor": {
+                "Columns": [
+                    {
+                        "Name": "id",
+                        "Type": "bigint"
+                    },
+                    {
+                        "Name": "name",
+                        "Type": "string"
+                    },
+                    {
+                        "Name": "category",
+                        "Type": "string"
+                    },
+                    {
+                        "Name": "value",
+                        "Type": "double"
+                    },
+                    {
+                        "Name": "timestamp",
+                        "Type": "string"
+                    }
+                ],
+                "Location": "s3://fsxn-analytics-d-emase9hih8u3yemmaic6inea47x7rapn1b-ext-s3alias/",
+                "InputFormat": "org.apache.hadoop.mapred.TextInputFormat",
+                "OutputFormat": "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat",
+                "Compressed": false,
+                "NumberOfBuckets": -1,
+                "SerdeInfo": {
+                    "SerializationLibrary": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+                    "Parameters": {
+                        "field.delim": ","
+                    }
+                },
+                "BucketColumns": [],
+                "SortColumns": [],
+                "Parameters": {
+                    "skip.header.line.count": "1",
+                    "sizeKey": "14526690",
+                    "objectCount": "3",
+                    "UPDATED_BY_CRAWLER": "fsxn-data-crawler",
+                    "recordCount": "357822",
+                    "CrawlerSchemaSerializerVersion": "1.0",
+                    "averageRecordSize": "39",
+                    "partition_filtering.enabled": "true",
+                    "compressionType": "none",
+                    "CrawlerSchemaDeserializerVersion": "1.0",
+                    "classification": "csv",
+                    "columnsOrdered": "true",
+                    "delimiter": ",",
+                    "areColumnsQuoted": "false",
+                    "CRAWL_RUN_ID": "8381a439-f605-41a8-b232-99d95d78c371",
+                    "typeOfData": "file"
+                },
+                "StoredAsSubDirectories": false
+            },
+            "PartitionKeys": [
+                {
+                    "Name": "partition_0",
+                    "Type": "string"
+                }
+            ],
+            "TableType": "EXTERNAL_TABLE",
+            "Parameters": {
+                "skip.header.line.count": "1",
+                "sizeKey": "14526690",
+                "objectCount": "3",
+                "UPDATED_BY_CRAWLER": "fsxn-data-crawler",
+                "recordCount": "357822",
+                "CrawlerSchemaSerializerVersion": "1.0",
+                "averageRecordSize": "39",
+                "partition_filtering.enabled": "true",
+                "compressionType": "none",
+                "CrawlerSchemaDeserializerVersion": "1.0",
+                "classification": "csv",
+                "columnsOrdered": "true",
+                "delimiter": ",",
+                "areColumnsQuoted": "false",
+                "CRAWL_RUN_ID": "8381a439-f605-41a8-b232-99d95d78c371",
+                "typeOfData": "file"
+            },
+            "CreatedBy": "arn:aws:sts::178625946981:assumed-role/Dev-BLEAFsxnDataAnalytics-DataAnalyticsGlueCrawlerR-GcIqUuxUus1T/AWS-Crawler",
+            "IsRegisteredWithLakeFormation": false,
+            "CatalogId": "178625946981",
+            "VersionId": "1",
+            "IsMultiDialectView": false,
+            "IsMaterializedView": false
+        }
+    ]
+}

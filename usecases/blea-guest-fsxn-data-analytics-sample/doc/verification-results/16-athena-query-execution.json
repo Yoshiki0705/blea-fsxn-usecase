@@ -1,0 +1,45 @@
+{
+    "QueryExecution": {
+        "QueryExecutionId": "0f429d55-c442-4d54-afbd-0535a8513800",
+        "Query": "SELECT category, COUNT(*) as cnt, ROUND(AVG(value), 2) as avg_value FROM fsxn_analytics_d_emase9hih8u3yemmaic6inea47x7rapn1b_ext_s3alias GROUP BY category ORDER BY cnt DESC",
+        "StatementType": "DML",
+        "ResultConfiguration": {
+            "OutputLocation": "s3://dev-bleafsxndataanalytics-dataanalyticsathenaquery-ffuksn0yykj8/results/0f429d55-c442-4d54-afbd-0535a8513800.csv",
+            "EncryptionConfiguration": {
+                "EncryptionOption": "SSE_KMS",
+                "KmsKey": "arn:aws:kms:ap-northeast-1:178625946981:key/70d1f992-66cb-4116-863c-930fa17c62d1"
+            }
+        },
+        "ResultReuseConfiguration": {
+            "ResultReuseByAgeConfiguration": {
+                "Enabled": false
+            }
+        },
+        "QueryExecutionContext": {
+            "Database": "fsxn_analytics_db"
+        },
+        "Status": {
+            "State": "SUCCEEDED",
+            "SubmissionDateTime": "2026-06-03T21:45:18.646000+09:00",
+            "CompletionDateTime": "2026-06-03T21:45:20.975000+09:00"
+        },
+        "Statistics": {
+            "EngineExecutionTimeInMillis": 2149,
+            "DataScannedInBytes": 14526690,
+            "TotalExecutionTimeInMillis": 2329,
+            "QueryQueueTimeInMillis": 103,
+            "ServicePreProcessingTimeInMillis": 46,
+            "QueryPlanningTimeInMillis": 781,
+            "ServiceProcessingTimeInMillis": 31,
+            "ResultReuseInformation": {
+                "ReusedPreviousResult": false
+            }
+        },
+        "WorkGroup": "fsxn-analytics",
+        "EngineVersion": {
+            "SelectedEngineVersion": "Athena engine version 3",
+            "EffectiveEngineVersion": "Athena engine version 3"
+        },
+        "SubstatementType": "SELECT"
+    }
+}

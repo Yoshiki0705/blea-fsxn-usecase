@@ -1,0 +1,94 @@
+{
+    "MetricAlarms": [
+        {
+            "AlarmName": "Dev-BLEAFsxnDataAnalytics-MonitoringCpuUtilizationAlarmE52043EA-PADL2nMRTnXq",
+            "AlarmArn": "arn:aws:cloudwatch:ap-northeast-1:178625946981:alarm:Dev-BLEAFsxnDataAnalytics-MonitoringCpuUtilizationAlarmE52043EA-PADL2nMRTnXq",
+            "AlarmDescription": "FSxN CPU utilization exceeds 80%.",
+            "AlarmConfigurationUpdatedTimestamp": "2026-06-03T21:08:57.614000+09:00",
+            "ActionsEnabled": true,
+            "OKActions": [],
+            "AlarmActions": [
+                "arn:aws:sns:ap-northeast-1:178625946981:Dev-BLEAFsxnDataAnalytics-MonitoringAlarmTopicAF62D4F1-ndpUDYcR2WBQ"
+            ],
+            "InsufficientDataActions": [],
+            "StateValue": "OK",
+            "StateReason": "Threshold Crossed: 1 datapoint [5.940444703295299 (03/06/26 12:05:00)] was not greater than the threshold (80.0).",
+            "StateReasonData": "{\"version\":\"1.0\",\"queryDate\":\"2026-06-03T12:10:36.732+0000\",\"startDate\":\"2026-06-03T12:05:00.000+0000\",\"statistic\":\"Average\",\"period\":300,\"recentDatapoints\":[5.940444703295299],\"threshold\":80.0,\"evaluatedDatapoints\":[{\"timestamp\":\"2026-06-03T12:05:00.000+0000\",\"sampleCount\":2.0,\"value\":5.940444703295299}]}",
+            "StateUpdatedTimestamp": "2026-06-03T21:10:36.734000+09:00",
+            "MetricName": "CPUUtilization",
+            "Namespace": "AWS/FSx",
+            "Statistic": "Average",
+            "Dimensions": [
+                {
+                    "Name": "FileSystemId",
+                    "Value": "fs-008501f761785af19"
+                }
+            ],
+            "Period": 300,
+            "EvaluationPeriods": 3,
+            "Threshold": 80.0,
+            "ComparisonOperator": "GreaterThanThreshold",
+            "StateTransitionedTimestamp": "2026-06-03T21:10:36.734000+09:00"
+        },
+        {
+            "AlarmName": "Dev-BLEAFsxnDataAnalytics-MonitoringStorageCapacityAlarm00BED5E4-0k70OKKYKBQz",
+            "AlarmArn": "arn:aws:cloudwatch:ap-northeast-1:178625946981:alarm:Dev-BLEAFsxnDataAnalytics-MonitoringStorageCapacityAlarm00BED5E4-0k70OKKYKBQz",
+            "AlarmDescription": "FSxN storage capacity utilization exceeds 80%.",
+            "AlarmConfigurationUpdatedTimestamp": "2026-06-03T21:08:57.559000+09:00",
+            "ActionsEnabled": true,
+            "OKActions": [],
+            "AlarmActions": [
+                "arn:aws:sns:ap-northeast-1:178625946981:Dev-BLEAFsxnDataAnalytics-MonitoringAlarmTopicAF62D4F1-ndpUDYcR2WBQ"
+            ],
+            "InsufficientDataActions": [],
+            "StateValue": "INSUFFICIENT_DATA",
+            "StateReason": "Unchecked: Initial alarm creation",
+            "StateUpdatedTimestamp": "2026-06-03T21:08:57.559000+09:00",
+            "MetricName": "StorageCapacityUtilization",
+            "Namespace": "AWS/FSx",
+            "Statistic": "Average",
+            "Dimensions": [
+                {
+                    "Name": "FileSystemId",
+                    "Value": "fs-008501f761785af19"
+                }
+            ],
+            "Period": 300,
+            "EvaluationPeriods": 3,
+            "Threshold": 80.0,
+            "ComparisonOperator": "GreaterThanThreshold",
+            "StateTransitionedTimestamp": "2026-06-03T21:08:57.559000+09:00"
+        },
+        {
+            "AlarmName": "Dev-BLEAFsxnDataAnalytics-MonitoringThroughputUtilizationAlarm1966CAFC-eb3bT3CxbORN",
+            "AlarmArn": "arn:aws:cloudwatch:ap-northeast-1:178625946981:alarm:Dev-BLEAFsxnDataAnalytics-MonitoringThroughputUtilizationAlarm1966CAFC-eb3bT3CxbORN",
+            "AlarmDescription": "FSxN throughput utilization exceeds 80%. NFS/SMB and S3 AP share this throughput.",
+            "AlarmConfigurationUpdatedTimestamp": "2026-06-03T21:08:58.607000+09:00",
+            "ActionsEnabled": true,
+            "OKActions": [],
+            "AlarmActions": [
+                "arn:aws:sns:ap-northeast-1:178625946981:Dev-BLEAFsxnDataAnalytics-MonitoringAlarmTopicAF62D4F1-ndpUDYcR2WBQ"
+            ],
+            "InsufficientDataActions": [],
+            "StateValue": "OK",
+            "StateReason": "Threshold Crossed: 1 datapoint [0.30519999999999997 (03/06/26 12:04:00)] was not greater than the threshold (80.0).",
+            "StateReasonData": "{\"version\":\"1.0\",\"queryDate\":\"2026-06-03T12:09:20.379+0000\",\"startDate\":\"2026-06-03T12:04:00.000+0000\",\"statistic\":\"Average\",\"period\":300,\"recentDatapoints\":[0.30519999999999997],\"threshold\":80.0,\"evaluatedDatapoints\":[{\"timestamp\":\"2026-06-03T12:04:00.000+0000\",\"sampleCount\":2.0,\"value\":0.30519999999999997}]}",
+            "StateUpdatedTimestamp": "2026-06-03T21:09:20.382000+09:00",
+            "MetricName": "FileServerDiskThroughputUtilization",
+            "Namespace": "AWS/FSx",
+            "Statistic": "Average",
+            "Dimensions": [
+                {
+                    "Name": "FileSystemId",
+                    "Value": "fs-008501f761785af19"
+                }
+            ],
+            "Period": 300,
+            "EvaluationPeriods": 3,
+            "Threshold": 80.0,
+            "ComparisonOperator": "GreaterThanThreshold",
+            "StateTransitionedTimestamp": "2026-06-03T21:09:20.382000+09:00"
+        }
+    ],
+    "CompositeAlarms": []
+}

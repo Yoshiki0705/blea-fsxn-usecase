@@ -1,0 +1,53 @@
+{
+    "Crawler": {
+        "Name": "fsxn-data-crawler",
+        "Role": "Dev-BLEAFsxnDataAnalytics-DataAnalyticsGlueCrawlerR-GcIqUuxUus1T",
+        "Targets": {
+            "S3Targets": [
+                {
+                    "Path": "s3://fsxn-analytics-d-emase9hih8u3yemmaic6inea47x7rapn1b-ext-s3alias/",
+                    "Exclusions": []
+                }
+            ],
+            "JdbcTargets": [],
+            "MongoDBTargets": [],
+            "DynamoDBTargets": [],
+            "CatalogTargets": [],
+            "DeltaTargets": [],
+            "IcebergTargets": [],
+            "HudiTargets": []
+        },
+        "DatabaseName": "fsxn_analytics_db",
+        "Classifiers": [],
+        "RecrawlPolicy": {
+            "RecrawlBehavior": "CRAWL_EVERYTHING"
+        },
+        "SchemaChangePolicy": {
+            "UpdateBehavior": "UPDATE_IN_DATABASE",
+            "DeleteBehavior": "LOG"
+        },
+        "LineageConfiguration": {
+            "CrawlerLineageSettings": "DISABLE"
+        },
+        "State": "READY",
+        "Schedule": {
+            "ScheduleExpression": "cron(0 2 * * ? *)",
+            "State": "SCHEDULED"
+        },
+        "CrawlElapsedTime": 0,
+        "CreationTime": "2026-06-03T21:12:50+09:00",
+        "LastUpdated": "2026-06-03T21:12:50+09:00",
+        "LastCrawl": {
+            "Status": "SUCCEEDED",
+            "LogGroup": "/aws-glue/crawlers",
+            "LogStream": "fsxn-data-crawler",
+            "MessagePrefix": "8381a439-f605-41a8-b232-99d95d78c371",
+            "StartTime": "2026-06-03T21:41:39+09:00"
+        },
+        "Version": 2,
+        "LakeFormationConfiguration": {
+            "UseLakeFormationCredentials": false,
+            "AccountId": ""
+        }
+    }
+}

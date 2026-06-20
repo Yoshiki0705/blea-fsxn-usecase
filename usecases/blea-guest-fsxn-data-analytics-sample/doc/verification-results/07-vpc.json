@@ -1,0 +1,51 @@
+{
+    "Vpcs": [
+        {
+            "OwnerId": "178625946981",
+            "InstanceTenancy": "default",
+            "CidrBlockAssociationSet": [
+                {
+                    "AssociationId": "vpc-cidr-assoc-0560aaf5662972551",
+                    "CidrBlock": "10.0.0.0/16",
+                    "CidrBlockState": {
+                        "State": "associated"
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Tags": [
+                {
+                    "Key": "Repository",
+                    "Value": "aws-samples/baseline-environment-on-aws"
+                },
+                {
+                    "Key": "aws:cloudformation:stack-name",
+                    "Value": "Dev-BLEAFsxnDataAnalytics"
+                },
+                {
+                    "Key": "aws:cloudformation:logical-id",
+                    "Value": "NetworkingVpc6B5E6F44"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "Dev-BLEAFsxnDataAnalytics/Networking/Vpc"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "Development"
+                },
+                {
+                    "Key": "aws:cloudformation:stack-id",
+                    "Value": "arn:aws:cloudformation:ap-northeast-1:178625946981:stack/Dev-BLEAFsxnDataAnalytics/7cd9ba00-5f42-11f1-a545-0626e09db33f"
+                }
+            ],
+            "BlockPublicAccessStates": {
+                "InternetGatewayBlockMode": "off"
+            },
+            "VpcId": "vpc-0809f5832b8d335e5",
+            "State": "available",
+            "CidrBlock": "10.0.0.0/16",
+            "DhcpOptionsId": "dopt-6631d700"
+        }
+    ]
+}

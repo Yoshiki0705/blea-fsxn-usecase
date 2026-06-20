@@ -1,0 +1,112 @@
+{
+    "ResultSet": {
+        "Rows": [
+            {
+                "Data": [
+                    {
+                        "VarCharValue": "category"
+                    },
+                    {
+                        "VarCharValue": "cnt"
+                    },
+                    {
+                        "VarCharValue": "avg_value"
+                    }
+                ]
+            },
+            {
+                "Data": [
+                    {
+                        "VarCharValue": "D"
+                    },
+                    {
+                        "VarCharValue": "75034"
+                    },
+                    {
+                        "VarCharValue": "500.95"
+                    }
+                ]
+            },
+            {
+                "Data": [
+                    {
+                        "VarCharValue": "A"
+                    },
+                    {
+                        "VarCharValue": "75023"
+                    },
+                    {
+                        "VarCharValue": "502.68"
+                    }
+                ]
+            },
+            {
+                "Data": [
+                    {
+                        "VarCharValue": "B"
+                    },
+                    {
+                        "VarCharValue": "75015"
+                    },
+                    {
+                        "VarCharValue": "500.21"
+                    }
+                ]
+            },
+            {
+                "Data": [
+                    {
+                        "VarCharValue": "C"
+                    },
+                    {
+                        "VarCharValue": "74928"
+                    },
+                    {
+                        "VarCharValue": "501.71"
+                    }
+                ]
+            }
+        ],
+        "ResultSetMetadata": {
+            "ColumnInfo": [
+                {
+                    "CatalogName": "hive",
+                    "SchemaName": "",
+                    "TableName": "",
+                    "Name": "category",
+                    "Label": "category",
+                    "Type": "varchar",
+                    "Precision": 2147483647,
+                    "Scale": 0,
+                    "Nullable": "UNKNOWN",
+                    "CaseSensitive": true
+                },
+                {
+                    "CatalogName": "hive",
+                    "SchemaName": "",
+                    "TableName": "",
+                    "Name": "cnt",
+                    "Label": "cnt",
+                    "Type": "bigint",
+                    "Precision": 19,
+                    "Scale": 0,
+                    "Nullable": "UNKNOWN",
+                    "CaseSensitive": false
+                },
+                {
+                    "CatalogName": "hive",
+                    "SchemaName": "",
+                    "TableName": "",
+                    "Name": "avg_value",
+                    "Label": "avg_value",
+                    "Type": "double",
+                    "Precision": 17,
+                    "Scale": 0,
+                    "Nullable": "UNKNOWN",
+                    "CaseSensitive": false
+                }
+            ]
+        }
+    },
+    "UpdateCount": 0
+}

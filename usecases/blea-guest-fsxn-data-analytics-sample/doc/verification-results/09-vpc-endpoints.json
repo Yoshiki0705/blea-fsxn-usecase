@@ -1,0 +1,207 @@
+{
+    "VpcEndpoints": [
+        {
+            "VpcEndpointId": "vpce-0df92b99cc1b63a90",
+            "VpcEndpointType": "Gateway",
+            "VpcId": "vpc-0809f5832b8d335e5",
+            "ServiceName": "com.amazonaws.ap-northeast-1.s3",
+            "State": "available",
+            "PolicyDocument": "{\"Version\":\"2008-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"*\",\"Resource\":\"*\"}]}",
+            "RouteTableIds": [
+                "rtb-0113b92611b8cce18",
+                "rtb-0c6a8046e0e035860"
+            ],
+            "SubnetIds": [],
+            "Groups": [],
+            "IpAddressType": "ipv4",
+            "DnsOptions": {
+                "DnsRecordIpType": "service-defined"
+            },
+            "PrivateDnsEnabled": false,
+            "RequesterManaged": false,
+            "NetworkInterfaceIds": [],
+            "DnsEntries": [],
+            "CreationTimestamp": "2026-06-03T11:51:31+00:00",
+            "Tags": [
+                {
+                    "Key": "aws:cloudformation:stack-name",
+                    "Value": "Dev-BLEAFsxnDataAnalytics"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "Development"
+                },
+                {
+                    "Key": "aws:cloudformation:logical-id",
+                    "Value": "NetworkingVpcS3Endpoint35E0E4DF"
+                },
+                {
+                    "Key": "Repository",
+                    "Value": "aws-samples/baseline-environment-on-aws"
+                },
+                {
+                    "Key": "aws:cloudformation:stack-id",
+                    "Value": "arn:aws:cloudformation:ap-northeast-1:178625946981:stack/Dev-BLEAFsxnDataAnalytics/7cd9ba00-5f42-11f1-a545-0626e09db33f"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "Dev-BLEAFsxnDataAnalytics/Networking/Vpc"
+                }
+            ],
+            "OwnerId": "178625946981",
+            "ServiceRegion": "ap-northeast-1"
+        },
+        {
+            "VpcEndpointId": "vpce-050d8239afce52ba5",
+            "VpcEndpointType": "Interface",
+            "VpcId": "vpc-0809f5832b8d335e5",
+            "ServiceName": "com.amazonaws.ap-northeast-1.glue",
+            "State": "available",
+            "PolicyDocument": "{\n  \"Statement\": [\n    {\n      \"Action\": \"*\",\n      \"Effect\": \"Allow\",\n      \"Principal\": \"*\",\n      \"Resource\": \"*\"\n    }\n  ]\n}",
+            "RouteTableIds": [],
+            "SubnetIds": [
+                "subnet-090d7ccc8cb2a2392",
+                "subnet-0d5d4c4b27429b626"
+            ],
+            "Groups": [
+                {
+                    "GroupId": "sg-0556cc40bb91ad2bd",
+                    "GroupName": "Dev-BLEAFsxnDataAnalytics-NetworkingVpcGlueEndpointSecurityGroup15E9777B-UKLr3bzrKNi3"
+                }
+            ],
+            "IpAddressType": "ipv4",
+            "DnsOptions": {
+                "DnsRecordIpType": "ipv4"
+            },
+            "PrivateDnsEnabled": true,
+            "RequesterManaged": false,
+            "NetworkInterfaceIds": [
+                "eni-09b076e8a58402772",
+                "eni-0c5bab3f95d8a1ea8"
+            ],
+            "DnsEntries": [
+                {
+                    "DnsName": "vpce-050d8239afce52ba5-m8e2y3rp.glue.ap-northeast-1.vpce.amazonaws.com",
+                    "HostedZoneId": "Z2E726K9Y6RL4W"
+                },
+                {
+                    "DnsName": "vpce-050d8239afce52ba5-m8e2y3rp-ap-northeast-1a.glue.ap-northeast-1.vpce.amazonaws.com",
+                    "HostedZoneId": "Z2E726K9Y6RL4W"
+                },
+                {
+                    "DnsName": "vpce-050d8239afce52ba5-m8e2y3rp-ap-northeast-1c.glue.ap-northeast-1.vpce.amazonaws.com",
+                    "HostedZoneId": "Z2E726K9Y6RL4W"
+                },
+                {
+                    "DnsName": "glue.ap-northeast-1.amazonaws.com",
+                    "HostedZoneId": "Z05555523FFCJ1RHU5U6H"
+                },
+                {
+                    "DnsName": "glue.ap-northeast-1.api.aws",
+                    "HostedZoneId": "Z09799511MI8OHJJ2PMKB"
+                }
+            ],
+            "CreationTimestamp": "2026-06-03T11:51:40.025000+00:00",
+            "Tags": [
+                {
+                    "Key": "aws:cloudformation:stack-name",
+                    "Value": "Dev-BLEAFsxnDataAnalytics"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "Development"
+                },
+                {
+                    "Key": "aws:cloudformation:logical-id",
+                    "Value": "NetworkingVpcGlueEndpointFC29E906"
+                },
+                {
+                    "Key": "Repository",
+                    "Value": "aws-samples/baseline-environment-on-aws"
+                },
+                {
+                    "Key": "aws:cloudformation:stack-id",
+                    "Value": "arn:aws:cloudformation:ap-northeast-1:178625946981:stack/Dev-BLEAFsxnDataAnalytics/7cd9ba00-5f42-11f1-a545-0626e09db33f"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "Dev-BLEAFsxnDataAnalytics/Networking/Vpc"
+                }
+            ],
+            "OwnerId": "178625946981",
+            "ServiceRegion": "ap-northeast-1"
+        },
+        {
+            "VpcEndpointId": "vpce-0ceee1e19ae0756a6",
+            "VpcEndpointType": "Interface",
+            "VpcId": "vpc-0809f5832b8d335e5",
+            "ServiceName": "com.amazonaws.ap-northeast-1.athena",
+            "State": "available",
+            "PolicyDocument": "{\n  \"Statement\": [\n    {\n      \"Action\": \"*\",\n      \"Effect\": \"Allow\",\n      \"Principal\": \"*\",\n      \"Resource\": \"*\"\n    }\n  ]\n}",
+            "RouteTableIds": [],
+            "SubnetIds": [
+                "subnet-090d7ccc8cb2a2392",
+                "subnet-0d5d4c4b27429b626"
+            ],
+            "Groups": [
+                {
+                    "GroupId": "sg-03dcb5a3899edf63b",
+                    "GroupName": "Dev-BLEAFsxnDataAnalytics-NetworkingVpcAthenaEndpointSecurityGroup4154C754-ZUlorlMPtOBu"
+                }
+            ],
+            "IpAddressType": "ipv4",
+            "DnsOptions": {
+                "DnsRecordIpType": "ipv4"
+            },
+            "PrivateDnsEnabled": false,
+            "RequesterManaged": false,
+            "NetworkInterfaceIds": [
+                "eni-083e29eda70f060ec",
+                "eni-0b0df0030a08cef5a"
+            ],
+            "DnsEntries": [
+                {
+                    "DnsName": "vpce-0ceee1e19ae0756a6-lgmc4i2f.athena.ap-northeast-1.vpce.amazonaws.com",
+                    "HostedZoneId": "Z2E726K9Y6RL4W"
+                },
+                {
+                    "DnsName": "vpce-0ceee1e19ae0756a6-lgmc4i2f-ap-northeast-1a.athena.ap-northeast-1.vpce.amazonaws.com",
+                    "HostedZoneId": "Z2E726K9Y6RL4W"
+                },
+                {
+                    "DnsName": "vpce-0ceee1e19ae0756a6-lgmc4i2f-ap-northeast-1c.athena.ap-northeast-1.vpce.amazonaws.com",
+                    "HostedZoneId": "Z2E726K9Y6RL4W"
+                }
+            ],
+            "CreationTimestamp": "2026-06-03T11:51:40.678000+00:00",
+            "Tags": [
+                {
+                    "Key": "aws:cloudformation:stack-name",
+                    "Value": "Dev-BLEAFsxnDataAnalytics"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "Development"
+                },
+                {
+                    "Key": "aws:cloudformation:logical-id",
+                    "Value": "NetworkingVpcAthenaEndpoint9D872396"
+                },
+                {
+                    "Key": "Repository",
+                    "Value": "aws-samples/baseline-environment-on-aws"
+                },
+                {
+                    "Key": "aws:cloudformation:stack-id",
+                    "Value": "arn:aws:cloudformation:ap-northeast-1:178625946981:stack/Dev-BLEAFsxnDataAnalytics/7cd9ba00-5f42-11f1-a545-0626e09db33f"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "Dev-BLEAFsxnDataAnalytics/Networking/Vpc"
+                }
+            ],
+            "OwnerId": "178625946981",
+            "ServiceRegion": "ap-northeast-1"
+        }
+    ]
+}

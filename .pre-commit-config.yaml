@@ -1,0 +1,28 @@
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks
+
+  - repo: local
+    hooks:
+      - id: prettier-check
+        name: prettier
+        entry: npx prettier --check
+        language: system
+        types: [ts]
+        pass_filenames: true
+
+      - id: eslint-check
+        name: eslint
+        entry: npx eslint --max-warnings 50
+        language: system
+        types: [ts]
+        pass_filenames: true
+
+      - id: no-personal-info
+        name: no personal info in source
+        entry: bash -c 'if grep -rn "178625946981\|351389403887\|@gmail.com\|@netapp.com" "$@" 2>/dev/null | grep -v example.com; then echo "Personal info found!"; exit 1; fi'
+        language: system
+        types: [ts]
+        pass_filenames: true

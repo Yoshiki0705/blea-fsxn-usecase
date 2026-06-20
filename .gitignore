@@ -1,0 +1,33 @@
+# IDE & Editor
+.kiro/
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Environment & Secrets
+*.env
+.env.*
+*.pem
+*.key
+
+# CDK
+cdk.out/
+cdk.context.json
+
+# Node
+node_modules/
+*.js
+*.d.ts
+!jest.config.js
+
+# Temporary
+.tmp/
+*.tmp
+
+# Private notes
+.private/
+
+# Playwright MCP logs
+.playwright-mcp/

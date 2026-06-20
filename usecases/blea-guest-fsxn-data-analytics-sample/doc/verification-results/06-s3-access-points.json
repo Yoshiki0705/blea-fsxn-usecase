@@ -1,0 +1,295 @@
+{
+    "S3AccessPointAttachments": [
+        {
+            "Lifecycle": "AVAILABLE",
+            "CreationTime": "2026-04-14T00:47:51.430000+09:00",
+            "Name": "headobj-test-s3ap",
+            "Type": "ONTAP",
+            "OntapConfiguration": {
+                "VolumeId": "fsvol-0c583905429e614d7",
+                "FileSystemIdentity": {
+                    "Type": "UNIX",
+                    "UnixUser": {
+                        "Name": "root"
+                    }
+                }
+            },
+            "S3AccessPoint": {
+                "ResourceARN": "arn:aws:s3:ap-northeast-1:178625946981:accesspoint/headobj-test-s3ap",
+                "Alias": "headobj-test-s3a-ezp398gpuiixusfjkbymuqcnhaubaapn1b-ext-s3alias"
+            }
+        },
+        {
+            "Lifecycle": "AVAILABLE",
+            "CreationTime": "2026-04-14T14:41:52.017000+09:00",
+            "Name": "snowflake-test",
+            "Type": "ONTAP",
+            "OntapConfiguration": {
+                "VolumeId": "fsvol-0647183905872652c",
+                "FileSystemIdentity": {
+                    "Type": "UNIX",
+                    "UnixUser": {
+                        "Name": "root"
+                    }
+                }
+            },
+            "S3AccessPoint": {
+                "ResourceARN": "arn:aws:s3:ap-northeast-1:178625946981:accesspoint/snowflake-test",
+                "Alias": "snowflake-test-3xzg4g6nsqexwwm1xtbt1bt637f7napn1a-ext-s3alias"
+            }
+        },
+        {
+            "Lifecycle": "AVAILABLE",
+            "CreationTime": "2026-05-05T04:34:27.301000+09:00",
+            "Name": "fsxn-eda-s3ap",
+            "Type": "ONTAP",
+            "OntapConfiguration": {
+                "VolumeId": "fsvol-0c583905429e614d7",
+                "FileSystemIdentity": {
+                    "Type": "UNIX",
+                    "UnixUser": {
+                        "Name": "root"
+                    }
+                }
+            },
+            "S3AccessPoint": {
+                "ResourceARN": "arn:aws:s3:ap-northeast-1:178625946981:accesspoint/fsxn-eda-s3ap",
+                "Alias": "fsxn-eda-s3ap-fhyst3uaibf46uywh5xka84pnz8jaapn1a-ext-s3alias"
+            }
+        },
+        {
+            "Lifecycle": "AVAILABLE",
+            "CreationTime": "2026-05-09T02:55:23.065000+09:00",
+            "Name": "eda-demo-s3ap",
+            "Type": "ONTAP",
+            "OntapConfiguration": {
+                "VolumeId": "fsvol-0f7ab3a0723676e7c",
+                "FileSystemIdentity": {
+                    "Type": "UNIX",
+                    "UnixUser": {
+                        "Name": "root"
+                    }
+                }
+            },
+            "S3AccessPoint": {
+                "ResourceARN": "arn:aws:s3:ap-northeast-1:178625946981:accesspoint/eda-demo-s3ap",
+                "Alias": "eda-demo-s3ap-fnwqydfpmd4gabncr8xqepjrrt131apn1a-ext-s3alias"
+            }
+        },
+        {
+            "Lifecycle": "AVAILABLE",
+            "CreationTime": "2026-05-13T17:45:55.988000+09:00",
+            "Name": "v4testkbsync",
+            "Type": "ONTAP",
+            "OntapConfiguration": {
+                "VolumeId": "fsvol-0c583905429e614d7",
+                "FileSystemIdentity": {
+                    "Type": "UNIX",
+                    "UnixUser": {
+                        "Name": "root"
+                    }
+                }
+            },
+            "S3AccessPoint": {
+                "ResourceARN": "arn:aws:s3:ap-northeast-1:178625946981:accesspoint/v4testkbsync",
+                "Alias": "v4testkbsync-f4uup1usns9zk3abn7qo413kcgzgrapn1a-ext-s3alias"
+            }
+        },
+        {
+            "Lifecycle": "AVAILABLE",
+            "CreationTime": "2026-05-16T20:17:56.399000+09:00",
+            "Name": "fsxn-audit-observability",
+            "Type": "ONTAP",
+            "OntapConfiguration": {
+                "VolumeId": "fsvol-0a17e70de744e322f",
+                "FileSystemIdentity": {
+                    "Type": "UNIX",
+                    "UnixUser": {
+                        "Name": "root"
+                    }
+                }
+            },
+            "S3AccessPoint": {
+                "ResourceARN": "arn:aws:s3:ap-northeast-1:178625946981:accesspoint/fsxn-audit-observability",
+                "Alias": "fsxn-audit-obser-cbsi8mwwgahuh7sans3bbtxijig4sapn1b-ext-s3alias",
+                "VpcConfiguration": {
+                    "VpcId": "vpc-0ae01826f906191af"
+                }
+            }
+        },
+        {
+            "Lifecycle": "AVAILABLE",
+            "CreationTime": "2026-05-17T16:21:30.412000+09:00",
+            "Name": "fsxn-databricks-lakehouse",
+            "Type": "ONTAP",
+            "OntapConfiguration": {
+                "VolumeId": "fsvol-0647183905872652c",
+                "FileSystemIdentity": {
+                    "Type": "UNIX",
+                    "UnixUser": {
+                        "Name": "root"
+                    }
+                }
+            },
+            "S3AccessPoint": {
+                "ResourceARN": "arn:aws:s3:ap-northeast-1:178625946981:accesspoint/fsxn-databricks-lakehouse",
+                "Alias": "fsxn-databricks-qxuy4f4igpdh6kz8mnjdrfkcapsaoapn1b-ext-s3alias"
+            }
+        },
+        {
+            "Lifecycle": "AVAILABLE",
+            "CreationTime": "2026-05-18T22:48:14.423000+09:00",
+            "Name": "athena-verification-ap",
+            "Type": "ONTAP",
+            "OntapConfiguration": {
+                "VolumeId": "fsvol-05466fe8d84f0f334",
+                "FileSystemIdentity": {
+                    "Type": "UNIX",
+                    "UnixUser": {
+                        "Name": "root"
+                    }
+                }
+            },
+            "S3AccessPoint": {
+                "ResourceARN": "arn:aws:s3:ap-northeast-1:178625946981:accesspoint/athena-verification-ap",
+                "Alias": "athena-verificat-e8z7oep4u3hrqr7wzke4b8k6yi65hapn1b-ext-s3alias"
+            }
+        },
+        {
+            "Lifecycle": "AVAILABLE",
+            "CreationTime": "2026-05-22T15:25:16.207000+09:00",
+            "Name": "verification-test-ap",
+            "Type": "ONTAP",
+            "OntapConfiguration": {
+                "VolumeId": "fsvol-0e1fe85769794a92e",
+                "FileSystemIdentity": {
+                    "Type": "UNIX",
+                    "UnixUser": {
+                        "Name": "root"
+                    }
+                }
+            },
+            "S3AccessPoint": {
+                "ResourceARN": "arn:aws:s3:ap-northeast-1:178625946981:accesspoint/verification-test-ap",
+                "Alias": "verification-tes-fpg5t76dgh3xchkrudk6yc4jhgzz1apn1b-ext-s3alias"
+            }
+        },
+        {
+            "Lifecycle": "AVAILABLE",
+            "CreationTime": "2026-05-22T15:33:03.412000+09:00",
+            "Name": "verification-readonly-ap",
+            "Type": "ONTAP",
+            "OntapConfiguration": {
+                "VolumeId": "fsvol-0e1fe85769794a92e",
+                "FileSystemIdentity": {
+                    "Type": "UNIX",
+                    "UnixUser": {
+                        "Name": "nobody"
+                    }
+                }
+            },
+            "S3AccessPoint": {
+                "ResourceARN": "arn:aws:s3:ap-northeast-1:178625946981:accesspoint/verification-readonly-ap",
+                "Alias": "verification-rea-5g9jigcdoq9kcewiko6mmih45f46wapn1b-ext-s3alias"
+            }
+        },
+        {
+            "Lifecycle": "AVAILABLE",
+            "CreationTime": "2026-05-23T07:31:44.267000+09:00",
+            "Name": "verification-vpc-origin-ap",
+            "Type": "ONTAP",
+            "OntapConfiguration": {
+                "VolumeId": "fsvol-0e1fe85769794a92e",
+                "FileSystemIdentity": {
+                    "Type": "UNIX",
+                    "UnixUser": {
+                        "Name": "root"
+                    }
+                }
+            },
+            "S3AccessPoint": {
+                "ResourceARN": "arn:aws:s3:ap-northeast-1:178625946981:accesspoint/verification-vpc-origin-ap",
+                "Alias": "verification-vpc-jhm1khztfyat85bj4zrdkfo7i91khapn1b-ext-s3alias",
+                "VpcConfiguration": {
+                    "VpcId": "vpc-0ae01826f906191af"
+                }
+            }
+        },
+        {
+            "Lifecycle": "AVAILABLE",
+            "CreationTime": "2026-05-23T09:23:51.795000+09:00",
+            "Name": "snowflake-verification-ap",
+            "Type": "ONTAP",
+            "OntapConfiguration": {
+                "VolumeId": "fsvol-0e1fe85769794a92e",
+                "FileSystemIdentity": {
+                    "Type": "UNIX",
+                    "UnixUser": {
+                        "Name": "root"
+                    }
+                }
+            },
+            "S3AccessPoint": {
+                "ResourceARN": "arn:aws:s3:ap-northeast-1:178625946981:accesspoint/snowflake-verification-ap",
+                "Alias": "snowflake-verifi-qmkpa4gi8dwt3frn3i695qpha41c6apn1b-ext-s3alias"
+            }
+        },
+        {
+            "Lifecycle": "AVAILABLE",
+            "CreationTime": "2026-05-24T15:13:20.706000+09:00",
+            "Name": "fsxn-databricks-executor-test",
+            "Type": "ONTAP",
+            "OntapConfiguration": {
+                "VolumeId": "fsvol-05466fe8d84f0f334",
+                "FileSystemIdentity": {
+                    "Type": "UNIX",
+                    "UnixUser": {
+                        "Name": "root"
+                    }
+                }
+            },
+            "S3AccessPoint": {
+                "ResourceARN": "arn:aws:s3:ap-northeast-1:178625946981:accesspoint/fsxn-databricks-executor-test",
+                "Alias": "fsxn-databricks-qtd8gqcc617e5jfxnn5c89kfrg1agapn1b-ext-s3alias"
+            }
+        },
+        {
+            "Lifecycle": "AVAILABLE",
+            "CreationTime": "2026-06-01T20:33:12.181000+09:00",
+            "Name": "my-s3-access-point",
+            "Type": "ONTAP",
+            "OntapConfiguration": {
+                "VolumeId": "fsvol-0f69e1e23c1eb57ea",
+                "FileSystemIdentity": {
+                    "Type": "UNIX",
+                    "UnixUser": {
+                        "Name": "kodera"
+                    }
+                }
+            },
+            "S3AccessPoint": {
+                "ResourceARN": "arn:aws:s3:ap-northeast-1:178625946981:accesspoint/my-s3-access-point",
+                "Alias": "my-s3-access-poi-47ryw9a1ywf5jaczr65pxtukcpbphapn1b-ext-s3alias"
+            }
+        },
+        {
+            "Lifecycle": "AVAILABLE",
+            "CreationTime": "2026-06-03T21:12:04.104000+09:00",
+            "Name": "fsxn-analytics-dev",
+            "Type": "ONTAP",
+            "OntapConfiguration": {
+                "VolumeId": "fsvol-020b716e990d08192",
+                "FileSystemIdentity": {
+                    "Type": "UNIX",
+                    "UnixUser": {
+                        "Name": "nobody"
+                    }
+                }
+            },
+            "S3AccessPoint": {
+                "ResourceARN": "arn:aws:s3:ap-northeast-1:178625946981:accesspoint/fsxn-analytics-dev",
+                "Alias": "fsxn-analytics-d-emase9hih8u3yemmaic6inea47x7rapn1b-ext-s3alias"
+            }
+        }
+    ]
+}

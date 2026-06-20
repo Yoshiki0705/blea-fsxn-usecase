@@ -1,0 +1,69 @@
+{
+    "Volumes": [
+        {
+            "CreationTime": "2026-06-03T21:09:33+09:00",
+            "FileSystemId": "fs-008501f761785af19",
+            "Lifecycle": "CREATED",
+            "Name": "svm_analytics_root",
+            "OntapConfiguration": {
+                "FlexCacheEndpointType": "NONE",
+                "JunctionPath": "/",
+                "SecurityStyle": "UNIX",
+                "SizeInMegabytes": 1024,
+                "StorageEfficiencyEnabled": false,
+                "StorageVirtualMachineId": "svm-01bd3e9ac588f7112",
+                "StorageVirtualMachineRoot": true,
+                "TieringPolicy": {
+                    "Name": "NONE"
+                },
+                "UUID": "14c45dcc-5f45-11f1-b1a2-e945da23b4ef",
+                "OntapVolumeType": "RW",
+                "SnapshotPolicy": "default",
+                "CopyTagsToBackups": false,
+                "VolumeStyle": "FLEXVOL",
+                "AggregateConfiguration": {
+                    "Aggregates": [
+                        "aggr1"
+                    ]
+                },
+                "SizeInBytes": 1073741824
+            },
+            "ResourceARN": "arn:aws:fsx:ap-northeast-1:178625946981:volume/fs-008501f761785af19/fsvol-0faf0941b5a87cb81",
+            "VolumeId": "fsvol-0faf0941b5a87cb81",
+            "VolumeType": "ONTAP"
+        },
+        {
+            "CreationTime": "2026-06-03T21:11:00.264000+09:00",
+            "FileSystemId": "fs-008501f761785af19",
+            "Lifecycle": "CREATED",
+            "Name": "vol_data",
+            "OntapConfiguration": {
+                "FlexCacheEndpointType": "NONE",
+                "JunctionPath": "/data",
+                "SecurityStyle": "UNIX",
+                "SizeInMegabytes": 102400,
+                "StorageEfficiencyEnabled": true,
+                "StorageVirtualMachineId": "svm-01bd3e9ac588f7112",
+                "StorageVirtualMachineRoot": false,
+                "TieringPolicy": {
+                    "CoolingPeriod": 31,
+                    "Name": "AUTO"
+                },
+                "UUID": "5576f2d7-5f45-11f1-b1a2-e945da23b4ef",
+                "OntapVolumeType": "RW",
+                "SnapshotPolicy": "default",
+                "CopyTagsToBackups": false,
+                "VolumeStyle": "FLEXVOL",
+                "AggregateConfiguration": {
+                    "Aggregates": [
+                        "aggr1"
+                    ]
+                },
+                "SizeInBytes": 107374182400
+            },
+            "ResourceARN": "arn:aws:fsx:ap-northeast-1:178625946981:volume/fs-008501f761785af19/fsvol-020b716e990d08192",
+            "VolumeId": "fsvol-020b716e990d08192",
+            "VolumeType": "ONTAP"
+        }
+    ]
+}
