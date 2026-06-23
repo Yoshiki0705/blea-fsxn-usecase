@@ -31,6 +31,7 @@ export interface BLEAFsxnModernizationStackProps extends StackProps {
   enableEksPattern: boolean;
   enableBatchPattern: boolean;
   ec2InstanceType?: string;
+  ec2InstanceArchitecture?: 'ARM64' | 'X86_64';
   ec2MinCapacity?: number;
   ec2MaxCapacity?: number;
   batchMaxVcpus?: number;
@@ -94,7 +95,8 @@ export class BLEAFsxnModernizationStack extends Stack {
         ec2SecurityGroup: networking.ec2SecurityGroup,
         nfsDnsName: fsxnStorage.nfsDnsName,
         junctionPath: props.fsxnJunctionPath,
-        instanceType: props.ec2InstanceType || 't3.medium',
+        instanceType: props.ec2InstanceType || 't4g.medium',
+        instanceArchitecture: props.ec2InstanceArchitecture || 'ARM64',
         minCapacity: props.ec2MinCapacity || 1,
         maxCapacity: props.ec2MaxCapacity || 2,
       });

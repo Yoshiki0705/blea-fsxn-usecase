@@ -1004,6 +1004,32 @@ exports.handler = async (event) => {
       },
       "Type": "AWS::CloudWatch::Alarm",
     },
+    "MonitoringCollectionErrorAlarmC0672F81": {
+      "Properties": {
+        "AlarmActions": [
+          {
+            "Ref": "MonitoringAlarmTopicAF62D4F1",
+          },
+        ],
+        "AlarmDescription": "FlexCache metrics collection failing. Check Lambda logs and ONTAP management endpoint connectivity.",
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "Dimensions": [
+          {
+            "Name": "FileSystemId",
+            "Value": {
+              "Ref": "CacheFsxnFileSystem78A0A5E6",
+            },
+          },
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "CollectionErrors",
+        "Namespace": "FSxN/FlexCache",
+        "Period": 900,
+        "Statistic": "Sum",
+        "Threshold": 2,
+      },
+      "Type": "AWS::CloudWatch::Alarm",
+    },
     "MonitoringMetricsCollectorDA1614A2": {
       "DependsOn": [
         "CacheNetworkingVpcPrivateSubnet1RouteTableAssociation0825477E",
@@ -1014,49 +1040,247 @@ exports.handler = async (event) => {
       "Properties": {
         "Code": {
           "ZipFile": "
+const https = require('node:https');
 const { SecretsManagerClient, GetSecretValueCommand } = require('@aws-sdk/client-secrets-manager');
-const { CloudWatchClient, PutMetricDataCommand } = require('@aws-sdk/client-cloudwatch');
+const { CloudWatchClient, PutMetricDataCommand, GetMetricDataCommand } = require('@aws-sdk/client-cloudwatch');
+
+/**
+ * Call ONTAP REST API via HTTPS.
+ * FSx for ONTAP management endpoints use AWS-issued self-signed certificates
+ * that are not in public CA chains. rejectUnauthorized:false is the documented
+ * pattern for ONTAP REST API access from Lambda.
+ */
+function ontapRequest(host, path, username, password) {
+  return new Promise((resolve, reject) => {
+    const auth = Buffer.from(username + ':' + password).toString('base64');
+    const options = {
+      hostname: host,
+      port: 443,
+      path: path,
+      method: 'GET',
+      headers: { 'Authorization': 'Basic ' + auth, 'Accept': 'application/json' },
+      rejectUnauthorized: false,
+      timeout: 15000,
+    };
+    const req = https.request(options, (res) => {
+      let body = '';
+      res.on('data', (chunk) => { body += chunk; });
+      res.on('end', () => {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          resolve(JSON.parse(body));
+        } else {
+          reject(new Error('ONTAP API ' + res.statusCode + ': ' + body.substring(0, 200)));
+        }
+      });
+    });
+    req.on('error', reject);
+    req.on('timeout', () => { req.destroy(); reject(new Error('ONTAP API timeout')); });
+    req.end();
+  });
+}
+
+/**
+ * Retrieve the last published cumulative counter values from CloudWatch
+ * to compute deltas (rate metrics) for the current interval.
+ */
+async function getPreviousCounters(cwClient, namespace, fsId) {
+  const now = new Date();
+  const fiveMinAgo = new Date(now.getTime() - 10 * 60 * 1000);
+  try {
+    const resp = await cwClient.send(new GetMetricDataCommand({
+      StartTime: fiveMinAgo,
+      EndTime: now,
+      MetricDataQueries: [
+        { Id: 'prevHits', MetricStat: { Metric: { Namespace: namespace, MetricName: 'CumulativeHitCount', Dimensions: [{ Name: 'FileSystemId', Value: fsId }] }, Period: 300, Stat: 'Maximum' } },
+        { Id: 'prevMisses', MetricStat: { Metric: { Namespace: namespace, MetricName: 'CumulativeMissCount', Dimensions: [{ Name: 'FileSystemId', Value: fsId }] }, Period: 300, Stat: 'Maximum' } },
+      ],
+    }));
+    const hits = resp.MetricDataResults?.find(r => r.Id === 'prevHits');
+    const misses = resp.MetricDataResults?.find(r => r.Id === 'prevMisses');
+    const prevHits = (hits?.Values?.length > 0) ? hits.Values[0] : null;
+    const prevMisses = (misses?.Values?.length > 0) ? misses.Values[0] : null;
+    return { prevHits, prevMisses };
+  } catch (e) {
+    console.warn('Could not retrieve previous counters:', e.message);
+    return { prevHits: null, prevMisses: null };
+  }
+}
 
 exports.handler = async () => {
   const region = process.env.REGION;
   const secretArn = process.env.SECRET_ARN;
   const cacheFileSystemId = process.env.CACHE_FS_ID;
+  const managementEndpoint = process.env.MGMT_ENDPOINT;
+  const NAMESPACE = 'FSxN/FlexCache';
 
-  // Get ONTAP credentials
+  // 1. Get ONTAP credentials from Secrets Manager
   const smClient = new SecretsManagerClient({ region });
   const secretResp = await smClient.send(new GetSecretValueCommand({ SecretId: secretArn }));
   const secret = JSON.parse(secretResp.SecretString);
+  const username = secret.username || 'fsxadmin';
+  const password = secret.password;
 
-  // In production: call ONTAP REST API GET /api/storage/flexcache/flexcaches
-  // For now: publish placeholder metrics showing the pattern
+  if (!password) {
+    throw new Error('ONTAP password not found in secret');
+  }
+
   const cwClient = new CloudWatchClient({ region });
 
-  // Simulated metrics (replace with actual ONTAP API response parsing)
-  const metrics = [
-    { MetricName: 'CacheHitRatio', Value: 85.0, Unit: 'Percent' },
-    { MetricName: 'CacheMissCount', Value: 150, Unit: 'Count' },
-    { MetricName: 'OriginLatencyMs', Value: 45.0, Unit: 'Milliseconds' },
-    { MetricName: 'CapacityUsedPercent', Value: 42.0, Unit: 'Percent' },
+  // 2. Query FlexCache volumes from ONTAP REST API
+  let cacheHitRatio = 0;
+  let cacheMissCount = 0;
+  let originLatencyMs = 0;
+  let capacityUsedPercent = 0;
+  let currentHits = 0;
+  let currentMisses = 0;
+  let counterAvailable = false;
+
+  try {
+    const fcResp = await ontapRequest(
+      managementEndpoint,
+      '/api/storage/flexcache/flexcaches?fields=size,path,svm.name',
+      username, password
+    );
+
+    if (fcResp.records && fcResp.records.length > 0) {
+      const flexcache = fcResp.records[0];
+      const fcUuid = flexcache.uuid;
+
+      // Volume statistics (latency, capacity)
+      const statsResp = await ontapRequest(
+        managementEndpoint,
+        '/api/storage/volumes/' + fcUuid + '?fields=statistics,space',
+        username, password
+      );
+
+      if (statsResp.statistics) {
+        const stats = statsResp.statistics;
+        const latencyUs = (stats.latency_raw && stats.latency_raw.total) || 0;
+        const opsCount = (stats.iops_raw && stats.iops_raw.total) || 1;
+        // Average latency per operation (cumulative total / total ops)
+        originLatencyMs = opsCount > 0 ? (latencyUs / opsCount) / 1000 : 0;
+      }
+
+      // Capacity
+      if (statsResp.space) {
+        const used = statsResp.space.used || 0;
+        const size = statsResp.space.size || 1;
+        capacityUsedPercent = (used / size) * 100;
+      }
+
+      // FlexCache hit/miss counters (cumulative)
+      try {
+        const counterResp = await ontapRequest(
+          managementEndpoint,
+          '/api/cluster/counter/tables/flexcache_per_volume/rows?id=' + fcUuid +
+          '&counters=cache_miss_count,cache_hit_count',
+          username, password
+        );
+        if (counterResp.records && counterResp.records.length > 0) {
+          const counters = counterResp.records[0].counters || [];
+          const hitCounter = counters.find(c => c.name === 'cache_hit_count');
+          const missCounter = counters.find(c => c.name === 'cache_miss_count');
+          currentHits = hitCounter ? parseInt(hitCounter.value, 10) : 0;
+          currentMisses = missCounter ? parseInt(missCounter.value, 10) : 0;
+          counterAvailable = true;
+        }
+      } catch (counterErr) {
+        console.warn('FlexCache counter table unavailable:', counterErr.message);
+      }
+    }
+  } catch (apiErr) {
+    console.error('ONTAP API error:', apiErr.message);
+    await cwClient.send(new PutMetricDataCommand({
+      Namespace: NAMESPACE,
+      MetricData: [{
+        MetricName: 'CollectionErrors',
+        Value: 1,
+        Unit: 'Count',
+        Dimensions: [{ Name: 'FileSystemId', Value: cacheFileSystemId }],
+        Timestamp: new Date(),
+      }],
+    }));
+    throw apiErr;
+  }
+
+  // 3. Compute delta-based hit ratio from cumulative counters
+  if (counterAvailable) {
+    const prev = await getPreviousCounters(cwClient, NAMESPACE, cacheFileSystemId);
+
+    if (prev.prevHits !== null && prev.prevMisses !== null) {
+      const deltaHits = Math.max(0, currentHits - prev.prevHits);
+      const deltaMisses = Math.max(0, currentMisses - prev.prevMisses);
+      const deltaTotal = deltaHits + deltaMisses;
+      cacheHitRatio = deltaTotal > 0 ? (deltaHits / deltaTotal) * 100 : 0;
+      cacheMissCount = deltaMisses;
+    } else {
+      // First invocation: no previous data, report 0 (no estimation)
+      cacheHitRatio = 0;
+      cacheMissCount = 0;
+    }
+  }
+  // If counter not available: cacheHitRatio stays 0, no misleading estimation
+
+  // 4. Publish metrics to CloudWatch
+  const timestamp = new Date();
+  const dims = [{ Name: 'FileSystemId', Value: cacheFileSystemId }];
+
+  const metricsData = [
+    { MetricName: 'CacheHitRatio', Value: cacheHitRatio, Unit: 'Percent' },
+    { MetricName: 'CacheMissCount', Value: cacheMissCount, Unit: 'Count' },
+    { MetricName: 'OriginLatencyMs', Value: originLatencyMs, Unit: 'Milliseconds' },
+    { MetricName: 'CapacityUsedPercent', Value: capacityUsedPercent, Unit: 'Percent' },
+    // Store cumulative counters for next invocation's delta calculation
+    { MetricName: 'CumulativeHitCount', Value: currentHits, Unit: 'Count' },
+    { MetricName: 'CumulativeMissCount', Value: currentMisses, Unit: 'Count' },
   ];
 
+  if (!counterAvailable) {
+    metricsData.push({ MetricName: 'CounterUnavailable', Value: 1, Unit: 'Count' });
+  }
+
   await cwClient.send(new PutMetricDataCommand({
-    Namespace: 'FSxN/FlexCache',
-    MetricData: metrics.map(m => ({
-      ...m,
-      Dimensions: [{ Name: 'FileSystemId', Value: cacheFileSystemId }],
-      Timestamp: new Date(),
-    })),
+    Namespace: NAMESPACE,
+    MetricData: metricsData.map(m => ({ ...m, Dimensions: dims, Timestamp: timestamp })),
   }));
 
-  console.log(JSON.stringify({ event: 'metrics_published', count: metrics.length, fsId: cacheFileSystemId }));
-  return { statusCode: 200, metrics: metrics.length };
+  console.log(JSON.stringify({
+    event: 'metrics_published',
+    cacheHitRatio: cacheHitRatio.toFixed(1),
+    cacheMissCount,
+    originLatencyMs: originLatencyMs.toFixed(1),
+    capacityUsedPercent: capacityUsedPercent.toFixed(1),
+    counterAvailable,
+    fsId: cacheFileSystemId,
+  }));
+  return { statusCode: 200, metricsCount: metricsData.length };
 };
 ",
+        },
+        "DeadLetterConfig": {
+          "TargetArn": {
+            "Fn::GetAtt": [
+              "MonitoringMetricsDLQEB983745",
+              "Arn",
+            ],
+          },
         },
         "Environment": {
           "Variables": {
             "CACHE_FS_ID": {
               "Ref": "CacheFsxnFileSystem78A0A5E6",
+            },
+            "MGMT_ENDPOINT": {
+              "Fn::Join": [
+                "",
+                [
+                  "management.",
+                  {
+                    "Ref": "CacheFsxnFileSystem78A0A5E6",
+                  },
+                  ".fsx.ap-northeast-1.amazonaws.com",
+                ],
+              ],
             },
             "REGION": "ap-northeast-1",
             "SECRET_ARN": "arn:aws:secretsmanager:ap-northeast-1:123456789012:secret:test-XXXXXX",
@@ -1075,7 +1299,7 @@ exports.handler = async () => {
             "Arn",
           ],
         },
-        "Runtime": "nodejs20.x",
+        "Runtime": "nodejs22.x",
         "Timeout": 60,
         "VpcConfig": {
           "SecurityGroupIds": [
@@ -1154,6 +1378,16 @@ exports.handler = async () => {
         "PolicyDocument": {
           "Statement": [
             {
+              "Action": "sqs:SendMessage",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "MonitoringMetricsDLQEB983745",
+                  "Arn",
+                ],
+              },
+            },
+            {
               "Action": "secretsmanager:GetSecretValue",
               "Effect": "Allow",
               "Resource": "arn:aws:secretsmanager:ap-northeast-1:123456789012:secret:test-XXXXXX",
@@ -1168,6 +1402,11 @@ exports.handler = async () => {
               "Effect": "Allow",
               "Resource": "*",
             },
+            {
+              "Action": "cloudwatch:GetMetricData",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
           ],
           "Version": "2012-10-17",
         },
@@ -1179,6 +1418,15 @@ exports.handler = async () => {
         ],
       },
       "Type": "AWS::IAM::Policy",
+    },
+    "MonitoringMetricsDLQEB983745": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "MessageRetentionPeriod": 604800,
+        "SqsManagedSseEnabled": true,
+      },
+      "Type": "AWS::SQS::Queue",
+      "UpdateReplacePolicy": "Delete",
     },
     "MonitoringMetricsLogGroup5E5CD08D": {
       "DeletionPolicy": "Retain",

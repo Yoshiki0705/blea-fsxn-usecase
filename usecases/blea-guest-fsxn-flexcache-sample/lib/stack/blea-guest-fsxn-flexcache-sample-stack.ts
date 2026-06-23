@@ -119,6 +119,7 @@ export class BLEAFsxnFlexCacheStack extends Stack {
       lambdaSecurityGroup: cacheNet.lambdaSecurityGroup,
       secretArn: props.ontapSecretArn,
       cacheFileSystemId: cacheFsxn.fileSystemId,
+      cacheManagementEndpoint: cacheFsxn.managementDnsName,
       originFileSystemId: originFsxn.fileSystemId,
       cacheHitRatioAlarmThreshold: props.cacheHitRatioAlarmThreshold || 50,
       cacheCapacityAlarmThresholdPercent: props.cacheCapacityAlarmThresholdPercent || 80,

@@ -25,7 +25,10 @@ export interface AppParameter {
   enableBatchPattern: boolean;
 
   // EC2 config
+  // Graviton (ARM64): ~30% cost reduction vs equivalent x86 instance (e.g. t4g vs t3, m7g vs m5)
+  // x86_64: Use when application binaries are not available for ARM64
   ec2InstanceType?: string;
+  ec2InstanceArchitecture?: 'ARM64' | 'X86_64';
   ec2MinCapacity?: number;
   ec2MaxCapacity?: number;
 
@@ -59,7 +62,8 @@ export const devParameter: AppParameter = {
   enableEcsPattern: false,
   enableEksPattern: false,
   enableBatchPattern: false,
-  ec2InstanceType: 't3.medium',
+  ec2InstanceType: 't4g.medium',
+  ec2InstanceArchitecture: 'ARM64',
   ec2MinCapacity: 1,
   ec2MaxCapacity: 2,
   batchMaxVcpus: 16,
@@ -88,7 +92,8 @@ export const prodParameter: AppParameter = {
   enableEcsPattern: true,
   enableEksPattern: false,
   enableBatchPattern: true,
-  ec2InstanceType: 'm5.xlarge',
+  ec2InstanceType: 'm7g.xlarge',
+  ec2InstanceArchitecture: 'ARM64',
   ec2MinCapacity: 2,
   ec2MaxCapacity: 10,
   batchMaxVcpus: 64,

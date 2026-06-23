@@ -19,6 +19,7 @@ export interface CacheFsxnProps {
 export class CacheFsxn extends Construct {
   public readonly fileSystemId: string;
   public readonly svmId: string;
+  public readonly managementDnsName: string;
 
   constructor(scope: Construct, id: string, props: CacheFsxnProps) {
     super(scope, id);
@@ -39,6 +40,10 @@ export class CacheFsxn extends Construct {
     });
     fs.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN);
     this.fileSystemId = fs.ref;
+    // Management endpoint: management.<fs-id>.fsx.<region>.amazonaws.com
+    this.managementDnsName = cdk.Fn.join('', [
+      'management.', fs.ref, '.fsx.', cdk.Stack.of(this).region, '.amazonaws.com',
+    ]);
 
     const svm = new fsx.CfnStorageVirtualMachine(this, 'SVM', {
       fileSystemId: fs.ref,
